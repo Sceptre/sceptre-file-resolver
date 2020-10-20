@@ -1,14 +1,32 @@
-# README
+# File Resolver
 
-Add your resolver readme here. Remember to include the following:
+A Sceptre resolver to get file contents. The returned value that gets
+passed to the parameter can be a string, json, or yaml object.  The
+file extension determines the return type.
 
-- Tell people how to install it (e.g. pip install ...).
-- Be clear about the purpose of the resolver, its capabilities and limitations.
-- Tell people how to use it.
-- Give examples of the resolver in use.
+## Syntax:
 
-Read our wiki to learn how to use this repo:
-https://github.com/Sceptre/project/wiki/Sceptre-Resolver-Template
+```yaml
+parameters|sceptre_user_data:
+  <name>: !file_contents /path/to/file.txt
+```
 
-If you have any questions or encounter an issue
-[please open an issue](https://github.com/Sceptre/project/issues/new)
+## Examples
+
+Get file content and pass it to the parameter as a string:
+```yaml
+parameters:
+  iam_policy: !file /path/to/policy.txt
+```
+
+Get file contents and pass it to the parameter as a json object:
+```yaml
+parameters:
+  iam_policy: !file /path/to/policy.json
+```
+
+Get file contents and pass it to the sceptre_user_data as a yaml object:
+```yaml
+sceptre_user_data:
+  iam_policy: !file /path/to/policy.yaml
+```
