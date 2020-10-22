@@ -8,25 +8,54 @@ file extension determines the return type.
 
 ```yaml
 parameters|sceptre_user_data:
-  <name>: !file_contents /path/to/file.txt
+  <name>: !file /path/to/file
 ```
 
 ## Examples
 
+### string
 Get file content and pass it to the parameter as a string:
-```yaml
-parameters:
-  iam_policy: !file /path/to/policy.txt
+
+tags/departments.txt
+```
+"HR, Governance, Engineering, Marketing"
 ```
 
+```yaml
+parameters:
+  departments: !file tags/departments.txt
+```
+
+### json
 Get file contents and pass it to the parameter as a json object:
+
+tags/departments.json
 ```yaml
-parameters:
-  iam_policy: !file /path/to/policy.json
+[
+  "HR",
+  "Governance",
+  "Engineering",
+  "Marketing"
+]
 ```
 
+```yaml
+parameters:
+  departments: !file tags/departments.json
+```
+
+### yaml
 Get file contents and pass it to the sceptre_user_data as a yaml object:
+
+tags/departments.yaml
+```yaml
+- "HR"
+- "Governance"
+- "Engineering"
+- "Marketing"
+```
+
 ```yaml
 sceptre_user_data:
-  iam_policy: !file /path/to/policy.yaml
+  departments: !file tags/departments.yaml
 ```
