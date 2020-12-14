@@ -1,8 +1,12 @@
 # File Resolver
 
 A Sceptre resolver to get file contents. The returned value that gets
-passed to the parameter can be a string, json, or yaml object.  The
+passed to a parameter can be a string, json, or yaml object.  The
 file extension determines the return type.
+
+Unlike the [file_contents resolver](https://sceptre.cloudreach.com/2.2.1/docs/resolvers.html#file-contents)
+which can only pass strings to parameters this resolver can also pass json
+and yaml objects to parameters.
 
 ## Syntax:
 
