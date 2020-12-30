@@ -3,6 +3,7 @@
 import unittest
 import json
 import pytest
+import requests
 import tempfile
 import yaml
 
@@ -12,8 +13,6 @@ class TestFileResolver(unittest.TestCase):
     file_resolver = File(
         argument=None
     )
-
-    # def setup_method(self, test_method):
 
     def test_resolving_with_existing_file(self):
         with tempfile.NamedTemporaryFile(mode='w+') as f:
@@ -118,3 +117,40 @@ class TestFileResolver(unittest.TestCase):
             result = self.file_resolver.resolve()
 
         assert result == "stuff"
+
+    def test_resolving_with_valid_url_text_file(self):
+        file_content = 'stuff'
+        url_txt = "https://raw.githubusercontent.com/Sceptre/sceptre/master/LICENSE"
+        self.file_resolver.argument = url_txt
+        result = self.file_resolver.resolve()
+        assert "Apache Software License 2.0" in result
+
+    def test_resolving_with_valid_url_text_file(self):
+        file_content = 'stuff'
+        url_ref = "https://raw.githubusercontent.com/Sceptre/sceptre/master/LICENSE"
+        self.file_resolver.argument = url_ref
+        result = self.file_resolver.resolve()
+        assert "Apache Software License 2.0" in result
+
+    def test_resolving_with_valid_url_json_file(self):
+        file_content = 'stuff'
+        url_ref = "https://raw.githubusercontent.com/Sceptre/sceptre/master/integration-tests/sceptre-project/templates/valid_template.json"
+        self.file_resolver.argument = url_ref
+        result = self.file_resolver.resolve()
+        result_json = json.dumps(result)
+        expected = '{"Resources": {"WaitConditionHandle": {"Type": "AWS::CloudFormation::WaitConditionHandle", "Properties": {}}}}'
+        assert expected == result_json
+
+    def test_resolving_with_valid_url_yaml_file(self):
+        file_content = 'stuff'
+        url_ref = "https://raw.githubusercontent.com/Sceptre/sceptre/master/integration-tests/sceptre-project/templates/valid_template.yaml"
+        self.file_resolver.argument = url_ref
+        result = self.file_resolver.resolve()
+        result_json = json.dumps(result)
+        expected = '{"Resources": {"WaitConditionHandle": {"Type": "AWS::CloudFormation::WaitConditionHandle", "Properties": null}}}'
+        assert expected == result_json
+
+    def test_resolving_with_invalid_url_file(self):
+        with pytest.raises(requests.exceptions.RequestException):
+            self.file_resolver.argument = "https://raw.githubusercontent.com/Sceptre/sceptre/master/non_existing_file"
+            self.file_resolver.resolve()
