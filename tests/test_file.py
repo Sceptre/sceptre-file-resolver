@@ -30,7 +30,7 @@ class TestFileResolver(unittest.TestCase):
             self.file_resolver.resolve()
 
     def test_resolving_with_file_path_non_string_type(self):
-        with pytest.raises(TypeError):
+        with pytest.raises(ValueError):
             self.file_resolver.argument = None
             self.file_resolver.resolve()
 
