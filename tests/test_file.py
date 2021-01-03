@@ -29,9 +29,14 @@ class TestFileResolver(unittest.TestCase):
             self.file_resolver.argument = "/non_existant_file"
             self.file_resolver.resolve()
 
-    def test_resolving_with_file_path_non_string_type(self):
+    def test_resolving_with_no_file_path(self):
         with pytest.raises(ValueError):
             self.file_resolver.argument = None
+            self.file_resolver.resolve()
+
+    def test_resolving_with_empty_file_path(self):
+        with pytest.raises(ValueError):
+            self.file_resolver.argument = ""
             self.file_resolver.resolve()
 
     def test_resolving_with_existing_valid_json_file(self):
@@ -46,7 +51,7 @@ class TestFileResolver(unittest.TestCase):
         self.assertDictEqual(result, expected)
 
     def test_resolving_with_existing_invalid_json_file(self):
-        file_content = '{"badd" "json"}'
+        file_content = '{"bad" "json"}'
         with pytest.raises(json.decoder.JSONDecodeError):
             with tempfile.NamedTemporaryFile(mode='w+', suffix='.json') as f:
                 f.write(file_content)
