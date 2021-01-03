@@ -14,15 +14,6 @@ class TestFileResolver(unittest.TestCase):
         argument=None
     )
 
-    def test_resolving_with_existing_file(self):
-        with tempfile.NamedTemporaryFile(mode='w+') as f:
-            f.write("stuff")
-            f.seek(0)
-            self.file_resolver.argument = f.name
-            result = self.file_resolver.resolve()
-
-        assert result == "stuff"
-
     def test_resolving_with_non_existant_file(self):
         with pytest.raises(IOError):
             self.file_resolver.argument = "/non_existant_file"
@@ -117,13 +108,6 @@ class TestFileResolver(unittest.TestCase):
             result = self.file_resolver.resolve()
 
         assert result == "stuff"
-
-    def test_resolving_with_valid_url_text_file(self):
-        file_content = 'stuff'
-        url_txt = "https://raw.githubusercontent.com/Sceptre/sceptre/master/LICENSE"
-        self.file_resolver.argument = url_txt
-        result = self.file_resolver.resolve()
-        assert "Apache Software License 2.0" in result
 
     def test_resolving_with_valid_url_text_file(self):
         file_content = 'stuff'
