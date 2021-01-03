@@ -7,6 +7,27 @@ import yaml
 from sceptre.resolvers import Resolver
 
 
+def get_local_content(path):
+    """
+    Gets file contents from a file on the local machine
+    :param path: The absolute path to a file
+    """
+    try:
+        filename, file_extension = os.path.splitext(path)
+        with open(path, "r") as file:
+            content = file.read()
+    except (EnvironmentError, TypeError) as e:
+        raise e
+
+    if content:
+        if file_extension == '.json':
+            content = json.loads(content)
+        if file_extension == '.yaml' or file_extension == '.yml':
+            content = yaml.safe_load(content)
+
+    return content
+
+
 class File(Resolver):
     """
     Resolver for the contents of a file.
@@ -25,17 +46,10 @@ class File(Resolver):
         :returns: Contents of file.
         :rtype: str, or json/yaml parsed object based on file extension
         """
-        try:
-            file_path = self.argument
-            filename, file_extension = os.path.splitext(file_path)
-            with open(file_path, "r") as file:
-                content = file.read()
+        path = self.argument
+        if not path:
+            raise ValueError("Missing argument: path to a file")
 
-            if file_extension == '.json':
-                return json.loads(content)
-            if file_extension == '.yaml' or file_extension == '.yml':
-                return yaml.safe_load(content)
-            else:
-                return content
-        except (EnvironmentError, TypeError) as e:
-            raise e
+        content = get_local_content(path)
+
+        return content

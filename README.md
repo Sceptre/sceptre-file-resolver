@@ -8,16 +8,18 @@ file extension determines the return type.
 
 ```yaml
 parameters|sceptre_user_data:
-  <name>: !file /path/to/file
+  <name>: !file /path/to/local/file
 ```
 
 ## Examples
 
-### string
-Get file content and pass it to the parameter as a string:
+### Local file
+
+#### text
+Get file content and pass it to the parameter as a text string:
 
 tags/departments.txt
-```
+```text
 "HR, Governance, Engineering, Marketing"
 ```
 
@@ -30,7 +32,7 @@ parameters:
 Get file contents and pass it to the parameter as a json object:
 
 tags/departments.json
-```yaml
+```json
 [
   "HR",
   "Governance",
