@@ -8,7 +8,7 @@ a string.
 
 ## Motivation
 
-Unlike the [file_contents resolver](https://github.com/Sceptre/sceptre/blob/master/docs/_source/docs/resolvers.rst#file_contents)
+Unlike the [file_contents resolver](https://sceptre.cloudreach.com/latest/docs/resolvers.html#file-contents)
 which can only pass strings to parameters this resolver can also pass file
 content in as json and yaml object.
 
