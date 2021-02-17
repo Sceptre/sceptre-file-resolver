@@ -19,6 +19,11 @@ parameters|sceptre_user_data:
   <name>: !file /path/to/local/file
 ```
 
+```yaml
+parameters|sceptre_user_data:
+  <name>: !file URL/To/File
+```
+
 ## Examples
 
 ### Local file
@@ -36,7 +41,7 @@ parameters:
   departments: !file tags/departments.txt
 ```
 
-### json
+#### json
 Get file contents and pass it to the parameter as a json object:
 
 tags/departments.json
@@ -54,7 +59,7 @@ parameters:
   departments: !file tags/departments.json
 ```
 
-### yaml
+#### yaml
 Get file contents and pass it to the sceptre_user_data as a yaml object:
 
 tags/departments.yaml
@@ -71,3 +76,15 @@ sceptre_user_data:
 ```
 
 __Note__: will do the same for files with `.yml` extension.
+
+
+### Remote file
+Works similarly to local file except this will get file contents from the web.
+
+#### URL
+Get file contents from a URL reference:
+
+```yaml
+sceptre_user_data:
+  departments: !file https://my-bucket.s3.us-east-1.amazonaws.com/tags/departments.json
+```
