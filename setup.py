@@ -26,6 +26,7 @@ with open("README.md") as readme_file:
 
 install_requirements = [
     "packaging==16.8",
+    "requests>=2.25,<3"
 ]
 
 test_requirements = [
