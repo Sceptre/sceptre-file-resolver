@@ -9,7 +9,8 @@ coverage: coverage-all
 test:
 	    python -m pytest --junitxml=test-reports/junit.xml
 lint:
-	    flake8 .
+# 	    flake8 .
+      python3 -m flake8 .
 
 acceptance-test:
 	    behave acceptance-tests/
