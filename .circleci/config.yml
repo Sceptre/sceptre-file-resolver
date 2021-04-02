@@ -109,18 +109,18 @@ jobs:
           paths:
             - project
 
-  sonar:
-    docker:
-      - image: cloudreach/sceptre-circleci:latest
-    steps:
-      - attach_workspace:
-          at: /home/circleci
-
-      - run:
-          name: Run Sonarqube
-          command: |
-            . venv/bin/activate
-            make sonar
+#  sonar:
+#    docker:
+#      - image: cloudreach/sceptre-circleci:latest
+#    steps:
+#      - attach_workspace:
+#          at: /home/circleci
+#
+#      - run:
+#          name: Run Sonarqube
+#          command: |
+#            . venv/bin/activate
+#            make sonar
 
   deploy-test:
     docker:
@@ -211,18 +211,18 @@ workflows:
             tags:
               only: /.*/
 
-      - sonar:
-          context: sceptre-templates-context
-          requires:
-            - build
-            - lint-and-unit-test
+#      - sonar:
+#          context: sceptre-templates-context
+#          requires:
+#            - build
+#            - lint-and-unit-test
 
       - deploy-test:
           context: sceptre-templates-context
           requires:
             - build
             - lint-and-unit-test
-            - sonar
+#            - sonar
           filters:
             tags:
               only: /^v([0-9]+)\.([0-9]+)\.([0-9]+)(?:([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$/
@@ -238,7 +238,7 @@ workflows:
           requires:
             - build
             - lint-and-unit-test
-            - sonar
+#            - sonar
             - deploy-test
             - hold
           filters:
