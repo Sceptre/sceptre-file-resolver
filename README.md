@@ -10,7 +10,8 @@ a string.
 
 Unlike the [file_contents resolver](https://sceptre.cloudreach.com/latest/docs/resolvers.html#file-contents)
 which can only pass strings to parameters this resolver can also pass file
-content in as json and yaml object.
+content in as json and yaml object.  This resolver can also resolve remote file
+contents from the web.
 
 ## Syntax
 
