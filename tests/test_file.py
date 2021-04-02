@@ -9,6 +9,7 @@ import yaml
 
 from resolver.file import File
 
+
 class TestFileResolver(unittest.TestCase):
     file_resolver = File(
         argument=None
@@ -110,14 +111,12 @@ class TestFileResolver(unittest.TestCase):
         assert result == "stuff"
 
     def test_resolving_with_valid_url_text_file(self):
-        file_content = 'stuff'
         url_ref = "https://raw.githubusercontent.com/Sceptre/sceptre/master/LICENSE"
         self.file_resolver.argument = url_ref
         result = self.file_resolver.resolve()
         assert "Apache Software License 2.0" in result
 
     def test_resolving_with_valid_url_json_file(self):
-        file_content = 'stuff'
         url_ref = "https://raw.githubusercontent.com/Sceptre/sceptre/master/integration-tests/sceptre-project/templates/valid_template.json"
         self.file_resolver.argument = url_ref
         result = self.file_resolver.resolve()
@@ -126,7 +125,6 @@ class TestFileResolver(unittest.TestCase):
         assert expected == result_json
 
     def test_resolving_with_valid_url_yaml_file(self):
-        file_content = 'stuff'
         url_ref = "https://raw.githubusercontent.com/Sceptre/sceptre/master/integration-tests/sceptre-project/templates/valid_template.yaml"
         self.file_resolver.argument = url_ref
         result = self.file_resolver.resolve()

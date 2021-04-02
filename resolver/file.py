@@ -62,7 +62,6 @@ class File(Resolver):
     def __init__(self, *args, **kwargs):
         super(File, self).__init__(*args, **kwargs)
 
-
     def resolve(self):
         """
         Retrieves the contents of a file.
