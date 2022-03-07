@@ -4,14 +4,7 @@ Categories: Added, Removed, Changed, Fixed, Nonfunctional, Deprecated
 
 ## Unreleased
 
-<!--- All unreleased items go here  -->
+## 1.0.6 (03.07.2022)
 
-<!--- Example CHANGELOG entry
-
-## 0.1.0 (2019.07.02)
-
-### Added
-
-- Initial resolver code
-
--->
+### Changed
+- Replaced `packaging` requirement with one for `sceptre>=2.7`
