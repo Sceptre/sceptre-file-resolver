@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = "1.0.5"
+__version__ = "1.0.6"
 
 # More information on setting values:
 # https://github.com/Sceptre/project/wiki/sceptre-file-resolver
@@ -25,8 +25,8 @@ with open("README.md") as readme_file:
     README = readme_file.read()
 
 install_requirements = [
-    "packaging==16.8",
-    "requests>=2.25,<3"
+    "requests>=2.25,<3",
+    "sceptre>=2.7"
 ]
 
 test_requirements = [
