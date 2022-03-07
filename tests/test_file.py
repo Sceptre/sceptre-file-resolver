@@ -129,7 +129,7 @@ class TestFileResolver(unittest.TestCase):
         self.file_resolver.argument = url_ref
         result = self.file_resolver.resolve()
         result_json = json.dumps(result)
-        expected = '{"Resources": {"WaitConditionHandle": {"Type": "AWS::CloudFormation::WaitConditionHandle", "Properties": null}}}'
+        expected = '{"Resources": {"WaitConditionHandle": {"Type": "AWS::CloudFormation::WaitConditionHandle", "Properties": {}}}}'
         assert expected == result_json
 
     def test_resolving_with_invalid_url_file(self):
