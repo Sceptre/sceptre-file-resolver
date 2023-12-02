@@ -1,24 +1,11 @@
-coverage-all:
-		coverage erase
-		coverage run --source resolver -m unittest
-		coverage xml
-
-coverage: coverage-all
-		coverage report --show-missing
-
 test:
-	    python -m pytest --junitxml=test-reports/junit.xml
-lint:
-	    pre-commit run --all-files --show-diff-on-failure
+	poetry run pytest --cov=resolver --cov-report=term --cov-report=xml --junitxml=test-reports/junit.xml
 
-acceptance-test:
-	    behave acceptance-tests/
+lint:
+	poetry run pre-commit run --all-files --show-diff-on-failure
 
 dist: clean
-	python3 setup.py sdist
-	python3 setup.py bdist_wheel
-	twine check dist/*
-	ls -l dist
+	poetry build
 
 clean: clean-build clean-pyc clean-test
 
@@ -36,6 +23,5 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -fr {} +
 
 clean-test:
-	rm -fr .cache/
-	rm -f .coverage.xml
-	rm -f test-results/
+	rm -rf .cache/ test-reports/
+	rm -f .coverage coverage.xml
