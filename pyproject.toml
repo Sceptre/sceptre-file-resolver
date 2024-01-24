@@ -18,12 +18,13 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = "^2.25"
-sceptre = ">=4.0.1"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.5.0"
 pytest = "^7.4.3"
 pytest-cov = "^4.1.0"
+sceptre = "^4.0"
+tox-gh-matrix = "^0.2"
 
 [tool.poetry.plugins."sceptre.resolvers"]
 file = "resolver.file:File"
