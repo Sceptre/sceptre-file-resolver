@@ -22,9 +22,9 @@ def get_local_content(path):
         raise e
 
     if content:
-        if file_extension == '.json':
+        if file_extension == ".json":
             content = json.loads(content)
-        if file_extension == '.yaml' or file_extension == '.yml':
+        if file_extension == ".yaml" or file_extension == ".yml":
             content = yaml.safe_load(content)
 
     return content
@@ -46,9 +46,9 @@ def get_url_content(path):
         raise e
 
     if content:
-        if file_extension == '.json':
+        if file_extension == ".json":
             content = json.loads(content)
-        if file_extension == '.yaml' or file_extension == '.yml':
+        if file_extension == ".yaml" or file_extension == ".yml":
             content = yaml.safe_load(content)
 
     return content
@@ -73,7 +73,7 @@ class File(Resolver):
         if not path:
             raise ValueError("Missing argument: path or URL reference to a file")
 
-        if path.startswith('https') or path.startswith('http'):
+        if path.startswith("https") or path.startswith("http"):
             content = get_url_content(path)
         else:
             content = get_local_content(path)
