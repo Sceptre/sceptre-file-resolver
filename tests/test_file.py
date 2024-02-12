@@ -11,9 +11,7 @@ from resolver.file import File
 
 
 class TestFileResolver(unittest.TestCase):
-    file_resolver = File(
-        argument=None
-    )
+    file_resolver = File(argument=None)
 
     def test_resolving_with_non_existant_file(self):
         with pytest.raises(IOError):
@@ -32,7 +30,7 @@ class TestFileResolver(unittest.TestCase):
 
     def test_resolving_with_existing_valid_json_file(self):
         file_content = '{"good": "json"}'
-        with tempfile.NamedTemporaryFile(mode='w+', suffix='.json') as f:
+        with tempfile.NamedTemporaryFile(mode="w+", suffix=".json") as f:
             f.write(file_content)
             f.seek(0)
             self.file_resolver.argument = f.name
@@ -44,7 +42,7 @@ class TestFileResolver(unittest.TestCase):
     def test_resolving_with_existing_invalid_json_file(self):
         file_content = '{"bad" "json"}'
         with pytest.raises(json.decoder.JSONDecodeError):
-            with tempfile.NamedTemporaryFile(mode='w+', suffix='.json') as f:
+            with tempfile.NamedTemporaryFile(mode="w+", suffix=".json") as f:
                 f.write(file_content)
                 f.seek(0)
                 self.file_resolver.argument = f.name
@@ -60,7 +58,7 @@ class TestFileResolver(unittest.TestCase):
                   - A
                   - B
             """
-        with tempfile.NamedTemporaryFile(mode='w+', suffix='.yaml') as f:
+        with tempfile.NamedTemporaryFile(mode="w+", suffix=".yaml") as f:
             f.write(file_content)
             f.seek(0)
             self.file_resolver.argument = f.name
@@ -79,7 +77,7 @@ class TestFileResolver(unittest.TestCase):
                   - A
                   - B
             """
-        with tempfile.NamedTemporaryFile(mode='w+', suffix='.yml') as f:
+        with tempfile.NamedTemporaryFile(mode="w+", suffix=".yml") as f:
             f.write(file_content)
             f.seek(0)
             self.file_resolver.argument = f.name
@@ -94,15 +92,15 @@ class TestFileResolver(unittest.TestCase):
         properties: bad
         """
         with pytest.raises(yaml.parser.ParserError):
-            with tempfile.NamedTemporaryFile(mode='w+', suffix='.yaml') as f:
+            with tempfile.NamedTemporaryFile(mode="w+", suffix=".yaml") as f:
                 f.write(file_content)
                 f.seek(0)
                 self.file_resolver.argument = f.name
                 self.file_resolver.resolve()
 
     def test_resolving_with_existing_valid_text_file(self):
-        file_content = 'stuff'
-        with tempfile.NamedTemporaryFile(mode='w+', suffix='.txt') as f:
+        file_content = "stuff"
+        with tempfile.NamedTemporaryFile(mode="w+", suffix=".txt") as f:
             f.write(file_content)
             f.seek(0)
             self.file_resolver.argument = f.name
